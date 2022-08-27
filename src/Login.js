@@ -12,11 +12,10 @@ export default function Login(props) {
     }
 
     return (
-        <Box
-            component="form">
+        <FormGroup>
             <TextField required id="outlined-required" label="Username" onChange={e => setuname(e.target.value)}/>
             <TextField required id="outlined-password-input" label="Password" type="password" onChange={e => setpass(e.target.value)}/>
-            <Button variant="contained" onClick={onLogin}>LOGIN</Button>
-        </Box>
+            <Button variant="contained" onClick={onLogin}>Login</Button>
+        </FormGroup>
     );
 }
