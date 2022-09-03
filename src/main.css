@@ -1,0 +1,19 @@
+html {
+    font-family: sans-serif;
+}
+.animalGrid{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 650px) {
+    .animalGrid{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 900px) {
+    .animalGrid{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}

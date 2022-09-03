@@ -1,28 +1,19 @@
-import { Card, CardContent, Typography, Stack} from '@mui/material'
+import { Card, CardContent, div, Stack} from '@mui/material'
 
 import { Container } from '@mui/system'
 
 export default function AnimalCard(props) {
-    let comments = []
-    props.animal.comments.forEach(element => {
-        comments.push(
-        <Card key={Math.random()}>
-            <Typography>{element}</Typography>
-        </Card>)
-    })
     return (
         <Card>
             <CardContent>
-                <Stack direction="row">
+                <Stack direction="row" alignItems="start">
                     <img src='/character.gif' width={100}/>
                     <Stack>
-                        <Typography>{props.animal.name}</Typography>
-                        <Typography>{props.animal.species}</Typography>
+                        <div>#{props.animal.intakeNum}</div>
+                        <div>{props.animal.name}</div>
+                        <div>{props.animal.species}</div>
                     </Stack>
                 </Stack>
-                <Container>
-                    {comments}
-                </Container>
             </CardContent>
         </Card>)
 }

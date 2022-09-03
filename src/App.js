@@ -3,6 +3,7 @@ import {Box, Stack, TextField} from '@mui/material'
 import { useRecoilState, atom } from 'recoil'
 import SearchApp from './SearchApp.js'
 import Login from './Login.js'
+import './main.css'
 let Grid = Grid2
 
 const dbid = "LocalStorage"
