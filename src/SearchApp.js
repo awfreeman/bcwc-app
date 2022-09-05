@@ -12,7 +12,7 @@ const animal = {
     name: "stinky mcdoodoofart",
     species: "critter",
     pictureUrl: "character.gif",
-    comments: ["comment1", "comment3"]
+    comments: "CommentText"
 }
 const searchOptions = ["Intake#", "Name", "Species", "Comments"]
 
