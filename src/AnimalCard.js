@@ -1,13 +1,13 @@
-import { Card, CardContent, div, Stack} from '@mui/material'
+import { Card, CardContent, div, Stack } from '@mui/material'
 
 import { Container } from '@mui/system'
 
 export default function AnimalCard(props) {
     return (
-        <Card>
+        <Card component='a' sx={{ margin: 1, cursor: "pointer" }} onClick={() => props.setEditorState(props.animal)}>
             <CardContent>
                 <Stack direction="row" alignItems="start">
-                    <img src='/character.gif' width={100}/>
+                    <img src='/character.gif' width={100} />
                     <Stack>
                         <div>#{props.animal.intakeNum}</div>
                         <div>{props.animal.name}</div>

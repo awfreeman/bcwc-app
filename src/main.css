@@ -4,6 +4,7 @@ html {
 .animalGrid{
     display: grid;
     grid-template-columns: 1fr;
+    padding:5px;
 }
 
 @media (min-width: 650px) {
