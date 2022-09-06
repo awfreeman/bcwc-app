@@ -7,7 +7,7 @@ export default function AnimalCard(props) {
         <Card component='a' sx={{ margin: 1, cursor: "pointer" }} onClick={() => props.setEditorState(props.animal)}>
             <CardContent>
                 <Stack direction="row" alignItems="start">
-                    <img src='/character.gif' width={100} />
+                    <img src={props.animal.mainImage} width={100} />
                     <Stack>
                         <div>#{props.animal.intakeNum}</div>
                         <div>{props.animal.name}</div>
