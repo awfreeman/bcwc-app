@@ -1,20 +1,36 @@
 html {
     font-family: sans-serif;
 }
-.animalGrid{
+
+.animalGrid {
     display: grid;
     grid-template-columns: 1fr;
-    padding:5px;
+    padding: 5px;
+}
+
+.imageViewerRoot {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 15px;
+    height: 200px;
+    max-height: 200px;
+    overflow: scroll;
+}
+
+.imageViewerRoot>img {
+    height: inherit;
+    padding-right: 5px;
 }
 
 @media (min-width: 650px) {
-    .animalGrid{
+    .animalGrid {
         grid-template-columns: 1fr 1fr;
     }
 }
 
 @media (min-width: 900px) {
-    .animalGrid{
+    .animalGrid {
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
