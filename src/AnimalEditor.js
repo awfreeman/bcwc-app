@@ -46,9 +46,32 @@ export default function AnimalEditor(props) {
                         maxWidth: "95%",
                         maxHeight: "95%",
                         zIndex: 200,
-                        overflow: "scroll"
+                        overflow: "scroll",
+                        display: "flex",
+                        flexDirection: "column"
                     }}>
-                        <Button variant="contained" id="exit" color="error" onClick={() => dismiss()} sx={{ zIndex: 200, color: "red", bgcolor: "red", position: "absolute", }}><CloseIcon sx={{ color: "white" }} /></Button>
+                        <Box sx={{
+                            display: "flex",
+                            flexDirection: "row-reverse"
+                        }}>
+                            <Button
+                                variant="contained"
+                                id="exit"
+                                color="error"
+                                onClick={() => dismiss()}
+                                sx={{
+                                    zIndex: 200,
+                                    color: "red",
+                                    bgcolor: "red",
+                                    minWidth: 45,
+                                    minHeight: 25,
+                                    width: 35,
+                                    height: 25,
+                                    position: "absolute"
+                                }}>
+                                <CloseIcon sx={{ color: "white" }} />
+                            </Button>
+                        </Box>
                         <ImageViewer images={editor.images} />
                         <Stack
                             component="form"

@@ -1,4 +1,4 @@
-import { ButtonGroup, Stack, TextField, Button, Popper, MenuList, MenuItem, Paper } from '@mui/material'
+import { ButtonGroup, Stack, TextField, Button, Popper, MenuList, MenuItem, Paper, Box, InputBase } from '@mui/material'
 import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material'
 import { useRecoilState, atom } from 'recoil'
 import AnimalEditor from './AnimalEditor.js'
@@ -13,8 +13,8 @@ const animal = {
     species: "critter",
     pictureUrl: "character.gif",
     comments: "CommentText",
-    mainImage:"./character.gif",
-    images:["./images/character.gif","./images/character2.gif"]
+    mainImage: "./character.gif",
+    images: ["./images/character.gif", "./images/character2.gif"]
 }
 const searchOptions = ["Intake#", "Name", "Species", "Comments"]
 
@@ -32,16 +32,20 @@ export default function SearchApp() {
         <>
             <AnimalEditor state={editorState} />
             <Stack direction="column" alignItems="center" >
-                <Stack component="form" direction="row" alignContent="stretch" onSubmit={e => search(e)}>
-                    <TextField
-                        id="outlined-basic"
-                        label="Search"
-                        variant="outlined"
+                <Paper
+                    component="form"
+                    onSubmit={e => search(e)}
+                    sx={{
+                        display: "flex",
+                        width: "80%"
+                    }}>
+                    <InputBase
+                        placeholder="Search"
                         onChange={e => setSearchText(e.target.value)}
-                        sx={{ flex: 1, maxWidth: 400 }}
-                    />
+                        sx={{ flexGrow: 1 }}>
+                    </InputBase>
                     <Dropdown callback={setSearchOption} options={searchOptions} selection={searchOption} />
-                </Stack>
+                </Paper>
                 <div className="animalGrid">
                     <AnimalCard animal={animal} setEditorState={setEditorState} />
                     <AnimalCard animal={animal} setEditorState={setEditorState} />
