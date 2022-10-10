@@ -1,33 +1,102 @@
-import { ButtonGroup, Stack, TextField, Button, Popper, MenuList, MenuItem, Paper, Box, InputBase } from '@mui/material'
+import { ButtonGroup, Stack, Button, Popper, MenuList, MenuItem, Paper, InputBase } from '@mui/material'
 import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material'
 import { useRecoilState, atom } from 'recoil'
 import AnimalEditor from './AnimalEditor.js'
 import AnimalCard from './AnimalCard.js'
-import Grid2 from '@mui/material/Unstable_Grid2'
 import { useRef, useState } from 'react'
-let Grid = Grid2
 
-const animal = {
+const animal = [{
     intakeNum: 440472,
-    name: "stinky mcdoodoofart",
-    species: "critter",
+    name: "animal1",
+    species: "animal",
     pictureUrl: "character.gif",
     comments: "CommentText",
     mainImage: "./character.gif",
     images: ["./images/character.gif", "./images/character2.gif"]
-}
+},
+{
+    intakeNum: 440473,
+    name: "animal2",
+    species: "animal",
+    pictureUrl: "character.gif",
+    comments: "CommentText",
+    mainImage: "./character.gif",
+    images: ["./images/character.gif", "./images/character2.gif"]
+},
+{
+    intakeNum: 440474,
+    name: "animal3",
+    species: "animal",
+    pictureUrl: "character.gif",
+    comments: "CommentText",
+    mainImage: "./character.gif",
+    images: ["./images/character.gif", "./images/character2.gif"]
+},
+{
+    intakeNum: 440475,
+    name: "animal4",
+    species: "animal",
+    pictureUrl: "character.gif",
+    comments: "CommentText",
+    mainImage: "./character.gif",
+    images: ["./images/character.gif", "./images/character2.gif"]
+},
+{
+    intakeNum: 440476,
+    name: "animal5",
+    species: "animal",
+    pictureUrl: "character.gif",
+    comments: "CommentText",
+    mainImage: "./character.gif",
+    images: ["./images/character.gif", "./images/character2.gif"]
+},
+{
+    intakeNum: 440477,
+    name: "animal6",
+    species: "animal",
+    pictureUrl: "character.gif",
+    comments: "CommentText",
+    mainImage: "./character.gif",
+    images: ["./images/character.gif", "./images/character2.gif"]
+},
+]
 const searchOptions = ["Intake#", "Name", "Species", "Comments"]
 
 const searchTextState = atom({ key: 'searchText', default: "" })
 const editorState = atom({ key: "editorState", default: null })
+const resultsState = atom({ key: "resultsState", default: null })
+
 export default function SearchApp() {
     const [searchText, setSearchText] = useRecoilState(searchTextState)
     const [editor, setEditorState] = useRecoilState(editorState)
     const [searchOption, setSearchOption] = useState(searchOptions[0])
+    const [searchResults, setSearchResults] = useRecoilState(resultsState)
+
     function search(e) {
         e.preventDefault()
-        console.log(searchText)
+        if (searchText.length < 3)
+            return
+        switch (searchOption) {
+            case "Intake#":
+                break
+            case "Name":
+                break
+            case "Species":
+                break
+            case "Comments":
+                break
+            default:
+                break
+        }
+        let results = []
+        animal.forEach(x => {
+            if (x.name.toLowerCase().search(searchText.toLowerCase()) !== -1) {
+                results.push(<AnimalCard animal={x} setEditorState={setEditorState} />)
+            }
+        })
+        setSearchResults(results)
     }
+
     return (
         <>
             <AnimalEditor state={editorState} />
@@ -47,11 +116,7 @@ export default function SearchApp() {
                     <Dropdown callback={setSearchOption} options={searchOptions} selection={searchOption} />
                 </Paper>
                 <div className="animalGrid">
-                    <AnimalCard animal={animal} setEditorState={setEditorState} />
-                    <AnimalCard animal={animal} setEditorState={setEditorState} />
-                    <AnimalCard animal={animal} setEditorState={setEditorState} />
-                    <AnimalCard animal={animal} setEditorState={setEditorState} />
-                    <AnimalCard animal={animal} setEditorState={setEditorState} />
+                    {searchResults}
                 </div>
             </Stack>
         </>
@@ -61,14 +126,14 @@ export default function SearchApp() {
 function Dropdown(props) {
     const [popen, setPopen] = useState(false)
     const anchorRef = useRef(null);
-    let options = []
-    props.options.forEach(elem => {
-        options.push(
-            <MenuItem onClick={() => {
-                props.callback(elem)
-                setPopen(!popen)
-            }}>{elem}</MenuItem>)
-    })
+
+
+    let options = props.options.map(elem =>
+        <MenuItem onClick={() => {
+            props.callback(elem)
+            setPopen(!popen)
+        }}>{elem}</MenuItem>
+    )
 
     function openList(e) {
         setPopen(!popen)

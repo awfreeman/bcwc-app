@@ -1,7 +1,6 @@
-import { Paper, Box, TextField, Stack, ImageList, ImageListItem, Button } from '@mui/material'
+import { Paper, Box, TextField, Stack, Button } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import { useRecoilState } from 'recoil'
-import { Image } from '@mui/icons-material'
 function ImageViewer(props) {
     return (
         <div class="imageViewerRoot">
@@ -14,7 +13,7 @@ export default function AnimalEditor(props) {
     function dismiss() {
         setEditor(null)
     }
-    if (editor == null)
+    if (editor === null)
         return <></>
     else {
         return (
