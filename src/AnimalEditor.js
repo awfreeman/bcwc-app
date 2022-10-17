@@ -1,15 +1,17 @@
-import { Paper, Box, TextField, Stack, Button } from '@mui/material'
-import CloseIcon from '@mui/icons-material/Close'
-import { useRecoilState } from 'recoil'
+import React from "react"
+import { Paper, Box, TextField, Stack, Button } from "@mui/material"
+import CloseIcon from "@mui/icons-material/Close"
+import { useRecoilState } from "recoil"
+import { nanoid } from "nanoid"
 function ImageViewer(props) {
     return (
-        <div class="imageViewerRoot">
-            {props.images.map(uri => <img src={uri} loading="lazy" />)}
+        <div className="imageViewerRoot">
+            {props.images.map(uri => <img src={uri} loading="lazy" alt="" key={nanoid()}/>)}
         </div>
     )
 }
-export default function AnimalEditor(props) {
-    const [editor, setEditor] = useRecoilState(props.state)
+export default function AnimalEditor({ state }) {
+    const [editor, setEditor] = useRecoilState(state)
     function dismiss() {
         setEditor(null)
     }
@@ -27,8 +29,8 @@ export default function AnimalEditor(props) {
                     height: "100%",
                     bgcolor: "rgba(0, 0, 0, 0.5)"
                 }}
-                    onClick={e => dismiss()}
-                    id="exit">
+                onClick={() => dismiss()}
+                id="exit">
                 </Box>
                 <Box sx={{
                     position: "absolute",

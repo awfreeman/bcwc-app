@@ -1,10 +1,9 @@
-import { useRecoilState, atom } from 'recoil'
-import SearchApp from './SearchApp.js'
-import Login from './Login.js'
-import './main.css'
-
-const dbid = "LocalStorage"
-const userState = atom({ key: 'user', default: null })
+import React from "react"
+import { useRecoilState, atom } from "recoil"
+import SearchApp from "./SearchApp.js"
+import Login from "./Login.js"
+import "./main.css"
+const userState = atom({ key: "user", default: null })
 
 
 function App() {
@@ -21,4 +20,4 @@ function App() {
     }
 }
 
-export default App;
+export default App

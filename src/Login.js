@@ -1,3 +1,4 @@
+import React from "react"
 import { Button, FormGroup, TextField } from "@mui/material"
 import { Container } from "@mui/system"
 import { useState } from "react"
@@ -6,9 +7,9 @@ import { useState } from "react"
 export default function Login(props) {
 
     const [uname, setuname] = useState("")
-    const [pass, setpass] = useState("")
+    const [, setpass] = useState("")
 
-    function onLogin(e) {
+    function onLogin() {
         props.LoginCallback({ username: uname, token: "Token" })
     }
 
@@ -20,5 +21,5 @@ export default function Login(props) {
                 <Button variant="contained" onClick={onLogin}>Login</Button>
             </FormGroup>
         </Container>
-    );
+    )
 }

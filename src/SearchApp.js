@@ -1,9 +1,10 @@
-import { ButtonGroup, Stack, Button, Popper, MenuList, MenuItem, Paper, InputBase } from '@mui/material'
-import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material'
-import { useRecoilState, atom } from 'recoil'
-import AnimalEditor from './AnimalEditor.js'
-import AnimalCard from './AnimalCard.js'
-import { useRef, useState } from 'react'
+import React from "react"
+import { ButtonGroup, Stack, Button, Popper, MenuList, MenuItem, Paper, InputBase } from "@mui/material"
+import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material"
+import { useRecoilState, atom } from "recoil"
+import AnimalEditor from "./AnimalEditor.js"
+import AnimalCard from "./AnimalCard.js"
+import { useRef, useState } from "react"
 
 const animal = [{
     intakeNum: 440472,
@@ -60,15 +61,15 @@ const animal = [{
     images: ["./images/character.gif", "./images/character2.gif"]
 },
 ]
-const searchOptions = ["Intake#", "Name", "Species", "Comments"]
+const searchOptions = ["All", "Intake#", "Name", "Species", "Comments"]
 
-const searchTextState = atom({ key: 'searchText', default: "" })
+const searchTextState = atom({ key: "searchText", default: "" })
 const editorState = atom({ key: "editorState", default: null })
 const resultsState = atom({ key: "resultsState", default: null })
 
 export default function SearchApp() {
     const [searchText, setSearchText] = useRecoilState(searchTextState)
-    const [editor, setEditorState] = useRecoilState(editorState)
+    const [, setEditorState] = useRecoilState(editorState)
     const [searchOption, setSearchOption] = useState(searchOptions[0])
     const [searchResults, setSearchResults] = useRecoilState(resultsState)
 
@@ -77,24 +78,18 @@ export default function SearchApp() {
         if (searchText.length < 3)
             return
         switch (searchOption) {
-            case "Intake#":
-                break
-            case "Name":
-                break
-            case "Species":
-                break
-            case "Comments":
-                break
-            default:
-                break
+        case "Intake#":
+            break
+        case "Name":
+            break
+        case "Species":
+            break
+        case "Comments":
+            break
+        default:
+            break
         }
-        let results = []
-        animal.forEach(x => {
-            if (x.name.toLowerCase().search(searchText.toLowerCase()) !== -1) {
-                results.push(<AnimalCard animal={x} setEditorState={setEditorState} />)
-            }
-        })
-        setSearchResults(results)
+        setSearchResults(animal.map(x => (x.name.toLowerCase().search(searchText.toLowerCase()) !== -1) ? <AnimalCard animal={x} setEditorState={setEditorState} /> : <></>))
     }
 
     return (
@@ -106,7 +101,8 @@ export default function SearchApp() {
                     onSubmit={e => search(e)}
                     sx={{
                         display: "flex",
-                        width: "80%"
+                        width: "500px",
+                        maxWidth: "80%"
                     }}>
                     <InputBase
                         placeholder="Search"
@@ -125,25 +121,31 @@ export default function SearchApp() {
 
 function Dropdown(props) {
     const [popen, setPopen] = useState(false)
-    const anchorRef = useRef(null);
+    const anchorRef = useRef(null)
 
 
     let options = props.options.map(elem =>
         <MenuItem onClick={() => {
             props.callback(elem)
             setPopen(!popen)
-        }}>{elem}</MenuItem>
+        }}key={elem}>{elem}</MenuItem>
     )
 
-    function openList(e) {
+    function openList() {
         setPopen(!popen)
     }
 
     return (
         <>
-            <ButtonGroup variant="contained" ref={anchorRef}>
-                <Button sx={{ textTransform: "none", width: 100, fontSize: 16 }}>{props.selection}</Button>
-                <Button size="small" onClick={e => openList(e)}>{popen ? <ArrowDropUp /> : <ArrowDropDown />}</Button>
+            <ButtonGroup sx={{ boxShadow: 0 }} variant="contained" ref={anchorRef}>
+                <Button sx={{
+                    textTransform: "none",
+                    width: 100,
+                    fontSize: 16,
+                    borderRadius: 0,
+                    boxShadow: 0
+                }}>{props.selection}</Button>
+                <Button size="small" onClick={() => openList()}>{popen ? <ArrowDropUp /> : <ArrowDropDown />}</Button>
             </ButtonGroup>
             <Popper open={popen} anchorEl={anchorRef.current}>
                 <Paper sx={{ width: 145 }}>
