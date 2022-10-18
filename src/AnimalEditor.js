@@ -1,8 +1,9 @@
 import React from "react"
-import { Paper, Box, TextField, Stack, Button } from "@mui/material"
+import { Paper, Box, Button, InputBase } from "@mui/material"
 import CloseIcon from "@mui/icons-material/Close"
 import { useRecoilState } from "recoil"
 import { nanoid } from "nanoid"
+
 function ImageViewer(props) {
     return (
         <div className="imageViewerRoot">
@@ -10,6 +11,15 @@ function ImageViewer(props) {
         </div>
     )
 }
+
+function InputElement({ id, value, placeholder}) {
+    return(
+        <>
+            <InputBase placeholder={placeholder} defaultValue={value} id={id}/><br/>
+        </>
+    )
+}
+
 export default function AnimalEditor({ state }) {
     const [editor, setEditor] = useRecoilState(state)
     function dismiss() {
@@ -43,9 +53,6 @@ export default function AnimalEditor({ state }) {
                     right: 0
                 }}>
                     <Paper sx={{
-                        minWidth: "70%",
-                        maxWidth: "95%",
-                        maxHeight: "95%",
                         zIndex: 200,
                         overflow: "scroll",
                         display: "flex",
@@ -73,34 +80,13 @@ export default function AnimalEditor({ state }) {
                                 <CloseIcon sx={{ color: "white" }} />
                             </Button>
                         </Box>
-                        <ImageViewer images={editor.images} />
-                        <Stack
-                            component="form"
-                            onSubmit={e => e.preventDefault()}
-                            sx={{
-                                padding: "5px",
-                            }}>
+                        <form onSubmit={() => alert("aaaa")}>
                             <h3>#{editor.intakeNum}</h3>
-                            <TextField
-                                id="outlined-basic"
-                                variant="outlined"
-                                label="Name"
-                                defaultValue={editor.name}
-                                sx={{ padding: "2px", marginY: "5px" }} />
-                            <TextField
-                                id="outlined-basic"
-                                variant="outlined"
-                                label="Species"
-                                defaultValue={editor.species}
-                                sx={{ padding: "2px", marginY: "5px" }} />
-                            <TextField
-                                id="outlined-basic"
-                                variant="outlined"
-                                multiline
-                                label="Comments"
-                                defaultValue={editor.comments}
-                                sx={{ padding: "2px", marginY: "5px" }} />
-                        </Stack>
+                            <ImageViewer images={editor.images} />
+                            <InputElement id="name" placeholder="Name" value={editor.name}/>
+                            <InputElement id="species" placeholder="Species" value={editor.species}/>
+                            <InputElement id="comments" placeholder="Comments" value={editor.comments}/>
+                        </form>
                     </Paper>
                 </Box>
             </>
